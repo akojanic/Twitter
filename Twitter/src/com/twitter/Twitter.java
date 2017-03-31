@@ -5,18 +5,20 @@ import com.twitter.poruke.TwitterPoruka;
 
 /**
  * Klasa Twitter predstavlja listu objekata klase TwitterPoruka
+ * 
  * @author Andjela Kojanic
  *
  */
 
 public class Twitter {
 	/**
-	 * Lista ciji su elementi klase TwitterPoruka 
+	 * Lista ciji su elementi klase TwitterPoruka
 	 */
 	private LinkedList<TwitterPoruka> poruke = new LinkedList<TwitterPoruka>();
 
 	/**
 	 * Metoda vraca sve poruke iz liste
+	 * 
 	 * @return lista poruka
 	 */
 	public LinkedList<TwitterPoruka> vratiSvePoruke() {
@@ -24,25 +26,30 @@ public class Twitter {
 	}
 
 	/**
-	 * Ovom metodom se vrsi unos nove Twitter poruke u listu,
-	 * tako sto se prvo inicijalizuje nova poruka i napuni se podacima koji su prosledjeni, a zatim se takva poruka dodaje na <strong>kraj</strong> liste
+	 * Ovom metodom se vrsi unos nove Twitter poruke u listu, tako sto se prvo
+	 * inicijalizuje nova poruka i napuni se podacima koji su prosledjeni, a
+	 * zatim se takva poruka dodaje na <strong>kraj</strong> liste
+	 * 
 	 * @param korisnik
 	 * @param poruka
 	 */
 	public void unesi(String korisnik, String poruka) {
 		// Pravi se nova poruka i puni podacima.
 		TwitterPoruka tp = new TwitterPoruka();
-		tp.setKorisnik("korisnik");
+		tp.setKorisnik(korisnik); // suvisni navodnici
 		tp.setPoruka(poruka);
 		// Poruka se unosi u listu na kraj
 		poruke.addLast(tp);
 	}
 
 	/**
-	 * Metoda proverava i vraca niz poruka koje u sebi sadrze tag koji je prosledjen kao parametar
-	 * sa maksimalnim kapacitetom od 100 poruka. Ukoliko takvih poruka ima vise, metoda vraca prvih 100 poruka.
+	 * Metoda proverava i vraca niz poruka koje u sebi sadrze tag koji je
+	 * prosledjen kao parametar sa maksimalnim kapacitetom od 100 poruka.
+	 * Ukoliko takvih poruka ima vise, metoda vraca prvih 100 poruka.
+	 * 
 	 * @returns niz poruka koje sadrze tag
-	 * @throws java.lang.RuntimeException ako je tag null ili prazan string
+	 * @throws java.lang.RuntimeException
+	 *             ako je tag null ili prazan string
 	 */
 	public TwitterPoruka[] vratiPoruke(int maxBroj, String tag) {
 		if (tag == null || tag.isEmpty())

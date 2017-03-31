@@ -58,7 +58,8 @@ public class TwitterPoruka {
 	 * Metoda postavlja vrednost atributa poruka na String vrednost koja je
 	 * prosledjena kao parametar
 	 * 
-	 * @param sadrzaj poruke
+	 * @param sadrzaj
+	 *            poruke
 	 * @throws java.lang.RuntimeException
 	 *             ako je prosledjena vrednost
 	 *             <ul>

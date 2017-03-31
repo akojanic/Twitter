@@ -42,7 +42,7 @@ public class TwitterPorukaTest {
 
 	}
 
-	@Test 
+	@Test
 	public void testSetPoruka() {
 		String unetaPoruka = "hhhhhhhhhhh";
 		poruka.setPoruka(unetaPoruka);
@@ -65,9 +65,9 @@ public class TwitterPorukaTest {
 
 	@Test(expected = java.lang.RuntimeException.class)
 	public void testSetPorukaDugString() {
-		String pom="";
+		String pom = "";
 		for (int i = 0; i < 200; i++) {
-			pom+="x";
+			pom += "x";
 		}
 		poruka.setPoruka(pom);
 		assertTrue(poruka.getPoruka().length() > 140);
@@ -75,11 +75,11 @@ public class TwitterPorukaTest {
 
 	@Test
 	public void testToString() {
-		
+
 		poruka.setKorisnik("Andjela");
 		poruka.setPoruka("Sadrzaj poruke");
 
-		String pom ="KORISNIK:" + poruka.getKorisnik() + " PORUKA:" + poruka.getPoruka();
+		String pom = "KORISNIK:" + poruka.getKorisnik() + " PORUKA:" + poruka.getPoruka();
 		assertEquals(pom, poruka.toString());
 	}
 

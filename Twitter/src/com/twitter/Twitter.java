@@ -30,8 +30,8 @@ public class Twitter {
 	 * inicijalizuje nova poruka i napuni se podacima koji su prosledjeni, a
 	 * zatim se takva poruka dodaje na <strong>kraj</strong> liste
 	 * 
-	 * @param korisnik
-	 * @param poruka
+	 * @param korisnik ime korisnika poruke koja se unosi
+	 * @param poruka sadrzaj poruke koja se unosi
 	 */
 	public void unesi(String korisnik, String poruka) {
 		// Pravi se nova poruka i puni podacima.

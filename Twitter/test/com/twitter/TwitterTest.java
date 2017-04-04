@@ -25,9 +25,26 @@ public class TwitterTest {
 	}
 
 	@Test
+	public void testVratiSvePorukePraznaLista() {
+		assertEquals(new LinkedList<TwitterPoruka>(), t.vratiSvePoruke());
+	}
+
+	@Test
 	public void testVratiSvePoruke() {
-		LinkedList<TwitterPoruka> pom = t.vratiSvePoruke();
-		assertEquals(pom, t.vratiSvePoruke());
+
+		String[] k = { "korisnik1", "korisnik2", "korisnik3" };
+		String[] p = { "poruka1", "poruka2", "poruka3" };
+
+		t.unesi(k[0], p[0]);
+		t.unesi(k[1], p[1]);
+		t.unesi(k[2], p[2]);
+
+		LinkedList<TwitterPoruka> svePoruke = t.vratiSvePoruke();
+
+		for (int i = 0; i < svePoruke.size(); i++) {
+			assertEquals(svePoruke.get(i).getKorisnik(), k[i]);
+			assertEquals(svePoruke.get(i).getPoruka(), p[i]);
+		}
 	}
 
 	@Test
@@ -40,36 +57,75 @@ public class TwitterTest {
 		assertEquals(por, pomocna.getLast().getPoruka());
 	}
 
+	@Test
+	public void testUnesiUPostojecuListu() {
+
+		String[] k = { "korisnik1", "korisnik2", "korisnik3" };
+		String[] p = { "poruka1", "poruka2", "poruka3" };
+		
+		TwitterPoruka e1 = new TwitterPoruka();
+		e1.setKorisnik(k[0]);
+		e1.setPoruka(p[0]);
+
+		TwitterPoruka e2 = new TwitterPoruka();
+		e2.setKorisnik(k[1]);
+		e2.setPoruka(p[1]);
+
+		TwitterPoruka e3 = new TwitterPoruka();
+		e3.setKorisnik(k[2]);
+		e3.setPoruka(p[2]);
+
+		LinkedList<TwitterPoruka> lista = new LinkedList<TwitterPoruka>();
+		
+		lista.addLast(e1);
+		lista.addLast(e2);
+		lista.addLast(e3);
+				
+		t.setPoruke(lista);
+
+		int brojPorukaPreUnosa = t.vratiSvePoruke().size();
+		
+		t.unesi("korisnik4", "poruka4");
+		
+		int brojPorukaPosleUnosa = t.vratiSvePoruke().size();
+		
+		assertEquals(brojPorukaPreUnosa + 1, brojPorukaPosleUnosa);
+		assertEquals("korisnik4", t.vratiSvePoruke().getLast().getKorisnik());
+		assertEquals("poruka4", t.vratiSvePoruke().getLast().getPoruka());
+		
+	}
+
 	@Test(expected = java.lang.RuntimeException.class)
 	public void testVratiPoruke() {
-		int max = 10;
-		String tag = "na";
-		TwitterPoruka[] rezultat = t.vratiPoruke(max, tag);
-
-		for (int i = 0; i < rezultat.length; i++) {
-			assertTrue(rezultat[i].getPoruka().contains(tag));
-		}
+		t.unesi("korisnik1", "poruka1");
+		t.unesi("korisnik2", "poruka2");
+		
+		TwitterPoruka[] nizPoruka = t.vratiPoruke(2, "por");
+		TwitterPoruka[] niz = new TwitterPoruka[2];
+		TwitterPoruka tp1 = new TwitterPoruka();
+		tp1.setKorisnik("korisnik1");
+		tp1.setPoruka("poruka1");
+		niz[0] = tp1;
+		TwitterPoruka tp2 = new TwitterPoruka();
+		tp2.setKorisnik("korisnik2");
+		tp2.setPoruka("poruka2");
+		niz[1] = tp2;
+		
+		assertEquals(niz[0].getKorisnik(), nizPoruka[0].getKorisnik());
+		assertEquals(niz[0].getPoruka(), nizPoruka[0].getPoruka());
+		assertEquals(niz[1].getKorisnik(), nizPoruka[1].getKorisnik());
+		assertEquals(niz[1].getPoruka(), nizPoruka[1].getPoruka());
 	}
 
 	@Test(expected = java.lang.RuntimeException.class)
 	public void testVratiPorukeNullTag() {
-		int max = 10;
-		String tag = null;
+		t.vratiPoruke(13, null);
 
-		TwitterPoruka[] rezultat = t.vratiPoruke(max, tag);
-		for (int i = 0; i < rezultat.length; i++) {
-			assertTrue(rezultat[i].getPoruka().contains(tag));
-		}
 	}
 
 	@Test(expected = java.lang.RuntimeException.class)
 	public void testVratiPorukePrazanString() {
-		int max = 10;
-		String tag = "";
-		TwitterPoruka[] rezultat = t.vratiPoruke(max, tag);
-		for (int i = 0; i < rezultat.length; i++) {
-			assertTrue(rezultat[i].getPoruka().contains(tag));
-		}
+		t.vratiPoruke(13, "");
 	}
 
 }

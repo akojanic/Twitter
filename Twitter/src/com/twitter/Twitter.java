@@ -30,8 +30,10 @@ public class Twitter {
 	 * inicijalizuje nova poruka i napuni se podacima koji su prosledjeni, a
 	 * zatim se takva poruka dodaje na <strong>kraj</strong> liste
 	 * 
-	 * @param korisnik ime korisnika poruke koja se unosi
-	 * @param poruka sadrzaj poruke koja se unosi
+	 * @param korisnik
+	 *            ime korisnika poruke koja se unosi
+	 * @param poruka
+	 *            sadrzaj poruke koja se unosi
 	 */
 	public void unesi(String korisnik, String poruka) {
 		// Pravi se nova poruka i puni podacima.
@@ -74,5 +76,24 @@ public class Twitter {
 				} else
 					break;
 		return rezultat;
+	}
+
+	/**
+	 * Metoda vraca sve poruke
+	 * 
+	 * @return lista poruka
+	 */
+	public LinkedList<TwitterPoruka> getPoruke() {
+		return poruke;
+	}
+
+	/**
+	 * Metoda postavlja poruke
+	 * 
+	 * @param poruke
+	 *            prosledjena lista poruka
+	 */
+	public void setPoruke(LinkedList<TwitterPoruka> poruke) {
+		this.poruke = poruke;
 	}
 }
